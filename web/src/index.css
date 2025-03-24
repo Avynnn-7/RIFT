@@ -1,0 +1,402 @@
+:root {
+  --bg: #0b0f17;
+  --panel: #111827;
+  --panel-alt: #0f1521;
+  --border: #1f2937;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #60a5fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.app-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.status {
+  margin-left: auto;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.status.online {
+  color: #22c55e;
+}
+
+.status.offline {
+  color: #ef4444;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 280px;
+  border-right: 1px solid var(--border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.placeholder {
+  color: var(--muted);
+  margin: auto;
+}
+
+.symbol-search {
+  position: relative;
+}
+
+.symbol-search-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.symbol-search-results {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.symbol-search-results button {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.symbol-search-results button:hover {
+  background: var(--panel-alt);
+}
+
+.result-symbol {
+  font-weight: 600;
+}
+
+.result-name,
+.result-exchange {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.watchlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.watchlist-empty {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.watchlist-item {
+  display: flex;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.watchlist-item.active {
+  border-color: var(--accent);
+}
+
+.watchlist-select {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.watchlist-symbol {
+  font-weight: 600;
+}
+
+.watchlist-ltp {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.watchlist-score {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.watchlist-remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.instrument-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.instrument-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.instrument-price {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.top-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.toxic-meter,
+.crash-panel,
+.gauge,
+.chart-card,
+.recommendation-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.toxic-meter-header,
+.crash-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.toxic-meter-title,
+.crash-panel-title {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.toxic-meter-score,
+.crash-panel-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar-track {
+  height: 10px;
+  background: var(--panel-alt);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.crash-panel-signal {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.gauge-value {
+  fill: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.gauge-label {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.chart-title {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.chart-latest {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.recommendation-card {
+  border-left-width: 4px;
+}
+
+.recommendation-label {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.recommendation-action {
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.recommendation-details {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.metric-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sev-safe {
+  color: #22c55e;
+}
+
+.sev-caution {
+  color: #eab308;
+}
+
+.sev-elevated {
+  color: #f97316;
+}
+
+.sev-high {
+  color: #ef4444;
+}
+
+.sev-critical {
+  color: #dc2626;
+}
+
+.meter-bar {
+  display: block;
+  width: 100%;
+}
+
+.recommendation-card.rec-safe {
+  border-left-color: #22c55e;
+}
+
+.recommendation-card.rec-caution {
+  border-left-color: #eab308;
+}
+
+.recommendation-card.rec-elevated {
+  border-left-color: #f97316;
+}
+
+.recommendation-card.rec-high {
+  border-left-color: #ef4444;
+}
+
+.recommendation-card.rec-critical {
+  border-left-color: #dc2626;
+}
